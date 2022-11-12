@@ -18,6 +18,19 @@ rustflags = ["-C", "linker=clang", "-C", "link-arg=-fuse-ld=lld"]
 [dependencies]
 actix-web = "4"
 tokio = { version = "1.21.2", features = ["macros", "rt-multi-thread"]}
+serde = { version = "1", features = ["derive"]}
+
+[dependencies.sqlx]
+version = "0.0"
+default-features = false
+features = [
+    "runtime-tokio-rustls",
+    "macros",
+    "postgres",
+    "uuid",
+    "chrono",
+    "migrate"
+]
 
 [dev-dependencies]
 reqwest = "0.11.12"
