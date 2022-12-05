@@ -19,7 +19,10 @@ async fn main() -> std::io::Result<()> {
         .connect_lazy(&configuration.database.connection_string().expose_secret())
         .expect("Failed to create Postgres connection pool");
 
-    let host_port = format!("127.0.0.1:{}", configuration.application.port);
+    let host_port = format!(
+        "{}:{}",
+        configuration.application.host, configuration.application.port
+    );
     let listener = TcpListener::bind(host_port)?;
 
     zero2prod::startup::run(listener, connection_pool)?.await
